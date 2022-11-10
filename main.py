@@ -74,8 +74,10 @@ def home():
 
 
 class Interface:
-    control = ''
-    calc = Calcular()
+
+    def __init__(self):
+        self.control = 0
+        self.calc = Calcular()
 
     def loop(self):
         home()
@@ -121,23 +123,28 @@ class Interface:
     def menu_AdicionalLimpeza(self):
         print('------------------ Menu 3 de 3 - Adicional de Limpeza ------------------')
         while True:
-            self.control = int(input("0- Não desejo mais nada (encerrar)\n"
-                                      "1- Passar 10 peças de roupas - R$ 10.00\n"
-                                      "2- Limpeza de 1 Forno/Micro-ondas - R$ 12,00\n"
-                                      "3- Limpeza de 1 Geladeira/Freezer - R$ 20,00\n"
-                                      ">>> "))
-            if self.control == 1:
-                self.calc.adicional_limpeza(1)
-            elif self.control == 2:
-                self.calc.adicional_limpeza(2)
-            elif self.control == 3:
-                self.calc.adicional_limpeza(3)
-            elif self.control == 0:
-                print(f'TOTAL: R$ {self.calc.valor_total:,.2f} (metragem: {self.calc.metragem:,.2f} * Tipo: {self.calc.tipoLimpeza:,.2f} + adicional: {self.calc.valor_adicional:,.2f})')
-                break
-            else:
-                print('!!!!!! Opção Invalida !!!!!!!')
+            self.control = input("0- Não desejo mais nada (encerrar)\n"
+                                 "1- Passar 10 peças de roupas - R$ 10.00\n"
+                                 "2- Limpeza de 1 Forno/Micro-ondas - R$ 12,00\n"
+                                 "3- Limpeza de 1 Geladeira/Freezer - R$ 20,00\n"
+                                 ">>> ")
 
+            if self.control == '':
+                print('!!!!!! Opção Invalida !!!!!!!')
+            else:
+                self.control = int(self.control)
+                if self.control == 1:
+                    self.calc.adicional_limpeza(1)
+                elif self.control == 2:
+                    self.calc.adicional_limpeza(2)
+                elif self.control == 3:
+                    self.calc.adicional_limpeza(3)
+                elif self.control == 0:
+                    print(
+                        f'TOTAL: R$ {self.calc.valor_total:,.2f} (metragem: {self.calc.metragem:,.2f} * Tipo: {self.calc.tipoLimpeza:,.2f} + adicional: {self.calc.valor_adicional:,.2f})')
+                    break
+                else:
+                    print('!!!!!! Opção Invalida !!!!!!!')
 
 
 if __name__ == '__main__':
